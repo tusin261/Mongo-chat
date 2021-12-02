@@ -48,7 +48,7 @@ function sendEmailAuth(customer_email) {
             subject: 'Xác minh email',
             text: 'Xác minh email',
             // html: '<p>Click <a href="http://localhost:3000/user/complete-register/' + rd + '">here</a> to auth email</p>'\
-            html: '<a style="font-family:'+"Ubuntu Mono"+', monospace; display:inline-block; color:#ffffff; background-color:forestgreen; font-size:14px; font-weight:bold; text-decoration:none; padding-left:20px; padding-right:20px; padding-top:20px; padding-bottom:20px;" href="http://localhost:3000/auth/complete-register/' + rd + '">Verify E-mail Address</a>'
+            html: '<a style="font-family:'+"Ubuntu Mono"+', monospace; display:inline-block; color:#ffffff; background-color:forestgreen; font-size:14px; font-weight:bold; text-decoration:none; padding-left:20px; padding-right:20px; padding-top:20px; padding-bottom:20px;" href="https://cnm-chat-app.herokuapp.com/auth/complete-register/' + rd + '">Verify E-mail Address</a>'
             
         }
     
