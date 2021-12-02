@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/squib-ico.ico">
+    <title>Squib Chat</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body class="snow-bg">
+    <div class="container-fluid">
+        <!-- Header -->
+        <div class="row bg-white border">
+            <div class="col-2">
+                <a href="/users?userId=<%=senderId%>" style="text-decoration: none;">
+                    <img src="/squib3.png" alt="" style="width: 75px; height:70px; float: left;">
+                </a>
+            </div>
+            <div class="col-8">
+
+            </div>
+            <div class="col-2">
+                <div class="row mt-2">
+                    <div class="dropdown" style="cursor: pointer;">
+                        <div class="dropdown-toggle" data-toggle="dropdown"><img class="rounded-circle"
+                            src="<%=myProfile.image_url%>" alt="" style="width:50px; height: 50px;"></div>
+                        <div class="dropdown-menu mr-5">
+                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalUser">Thông tin tài khoản</a>
+                            <!-- <a class="dropdown-item" href="#">Link 2</a> -->
+
+                            <a class="dropdown-item" href="/">Đăng xuất</a>
+
+
+                        </div>
+                        <div class="modal fade" id="modalUser" role="dialog" style="cursor: default;">
+                            <div class="modal-dialog ">
+                                <div class="modal-content" style="border-radius: 20px;">
+                                    <div class="col-12">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Thông tin tài khoản</h4>
+                                            <input type="button" class="close btn shadow-none" data-dismiss="modal" value="X">
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="col-12 bg-white">
+                                                <div class="row"
+                                                    style="background-image: url(/background.jpg); background-position: center; height: 200px;">
+                                                </div>
+                                                <div class="row bg-white">
+                                                    <img src="<%=myProfile.image_url%>" alt="" width="80" height="80" class=" rounded-circle"
+                                                        style="position: absolute; left: 176px; top: 160px;">
+                                                    <div>
+                                                        <h4 for="" class="mt-5">
+
+                                                        </h4>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <form action="" class="mt-5">
+                                                            <div class="form-group">
+                                                                <label for="username" style="float: left;">
+                                                                    Email
+                                                                </label>
+                                                                <input type="text" name="username" id="username"
+                                                                    placeholder="" class="form-control tt1" value="<%=myProfile.email%>" disabled>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="username" style="float: left;">
+                                                                    Username
+                                                                </label>
+                                                                <input type="text" name="username" id="username"
+                                                                    placeholder="" class="form-control tt1" value="<%=myProfile.userName%>" disabled>
+                                                            </div>
+                                                            <a href="/users/user-info/<%=myProfile._id%>">Thay đổi mật khẩu</a>
+                                                        </form>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Center -->
+        <div class="row" id="trungtam">
+            <!-- Main menu -->
+            <div class="col-1" style="background-color: #199054;">
+                <div class="row mt-3">
+                    <ul class="nav nav-pills flex-column ">
+                        <li class="nav-item pill-1 mb-3">
+                            <a class="nav-link" data-toggle="" href="/users?userId=<%=senderId%>">
+                                <img src="/messenger.png" alt="" style=" width: 40px;">
+                            </a>
+                        </li>
+                        <li class="nav-item pill-2 mb-3">
+                            <a class="nav-link active" data-toggle="" href="/users/listRequest?userId=<%=senderId%>">
+                                <img src="/address-book.png" alt="" style="width: 40px; ">
+                            </a>
+                        </li>
+
+                        <!-- <li class="nav-item pill-3 mb-3">
+                            <a class="nav-link " data-toggle="tab" href="#menu3">
+                                <img src="/account.png" alt="" style=" width: 40px;">
+                            </a>
+                        </li> -->
+
+                    </ul>
+                </div>
+            </div>
+            <div class="col-11 border mb-5 ">
+                <div id="friend" class="tab-pane">
+                    <div class="row">
+                        <div class="col-9 px-4 py-2 bg-light">
+                            <div class="media">
+                                <div class="media-body ml-4">
+                                    <div class="mt-1">
+                                        <h2>Gợi ý kết bạn</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3 bg-light">
+
+                        </div>
+                    </div>
+                    
+                    <div class="row friend-box">
+                        <div class="container p-2">
+                            <%if(locals.listSentRequest){%>
+                            <%for(let i=0;i<listSentRequest.length;i++){%>
+                            <div class="col-3 text-center align-items-center mt-2" style="float: left;">
+                                <div class="card h-100 bg-light" style="border-radius: 10px;">
+                                    <div>
+                                        <img class="card-img-top rounded-circle mt-2" src="<%=listSentRequest[i].image_url%>" style="width:100px;height:100px;" alt="">
+                                        <div class="card-body">
+                                            <h2 class="card-title">
+                                                <%=listSentRequest[i].userName%>
+                                            </h2>
+                                        </div>
+                                        <div class="card-body">
+                                            <form action="/users/processFriendRequest" method="post">
+                                                <input type="hidden" name="senderId" value="<%=myProfile._id%>">
+                                                <input type="hidden" name="receiverId" value="<%=listSentRequest[i]._id%>">
+                                                <input type="hidden" name="loai" value="chapnhan">
+                                                <input type="submit" class="btn btn-primary mb-1" value="Thêm bạn">
+                                            </form>
+                                            <form action="/users/processFriendRequest" method="post">
+                                                <input type="hidden" name="senderId" value="<%=myProfile._id%>">
+                                                <input type="hidden" name="receiverId" value="<%=listSentRequest[i]._id%>">
+                                                <input type="hidden" name="loai" value="tuchoi">
+                                                <input type="submit" class="btn btn-danger m-1" value="Từ chối">
+                                            </form>
+                                        </div>
+                                    </div>
+                                                             
+                                </div>
+                            </div>
+                            <%}%>
+                            <%}%>
+                        </div>
+                        
+                    </div>
+                        
+
+                    
+                </div>
+        </div>
+
+        <div class="row fixed-bottom border" id="footer">
+            <div class="text-center">
+                ©2021 Đồ án web chat: <b>Nhóm 7</b>
+            </div>
+        </div>
+    </div>
+
+    
+</body>
+
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/squib-ico.ico">
+    <title>Squib Chat</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body class="snow-bg">
+    <div class="container-fluid">
+        <!-- Header -->
+        <div class="row bg-white border">
+            <div class="col-2">
+                <%if(locals.friend){%>
+                <a href="/users?userId=<%=senderId%>" style="text-decoration: none;">
+                    <img src="/squib3.png" alt="" style="width: 75px; height:70px; float: left;">
+                </a>
+                <%}%>
+                <%if(locals.me){%>
+                <a href="/users?userId=<%=me._id%>" style="text-decoration: none;">
+                    <img src="/squib3.png" alt="" style="width: 75px; height:70px; float: left;">
+                </a>
+                <%}%>
+            </div>
+            <div class="col-8">
+
+            </div>
+            <div class="col-2">
+                <div class="row mt-3">
+                    <div class="dropdown" style="cursor: pointer;">
+                        <div class="dropdown-toggle" data-toggle="dropdown"><img class="rounded-circle"
+                                src="<%=myProfile.image_url%>" alt="" style="width:40px; height: 40px;"></div>
+                        <div class="dropdown-menu mr-5">
+                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalUser">Thông tin tài
+                                khoản</a>
+                            <!-- <a class="dropdown-item" href="#">Link 2</a> -->
+
+                            <a class="dropdown-item" href="/">Đăng xuất</a>
+
+
+                        </div>
+                        <div class="modal fade" id="modalUser" role="dialog" style="cursor: default;">
+                            <div class="modal-dialog">
+                                <div class="modal-content" style="border-radius: 20px;">
+                                    <div class="col-12">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Thông tin tài khoản</h4>
+                                            <input type="button" class="close btn shadow-none" data-dismiss="modal"
+                                                value="X">
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="col-12 bg-white">
+                                                <div class="row"
+                                                    style="background-image: url(/background.jpg); background-position: center; height: 200px;">
+                                                </div>
+                                                <div class="row bg-white">
+                                                    <img src="<%=myProfile.image_url%>" alt="" width="80"
+                                                        height="80" class="rounded-circle"
+                                                        style="position: absolute; left: 176px; top: 160px;">
+                                                    <div>
+                                                        <h4 for="" class="mt-5">
+
+                                                        </h4>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <form action="" class="mt-3">
+                                                            <div class="row">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="username" style="float: left;">
+                                                                    Email
+                                                                </label>
+                                                                <input type="text" name="username" id="username"
+                                                                    placeholder="" value="<%=myProfile.email%>" class="form-control tt1" disabled>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="username" style="float: left;">
+                                                                    Username
+                                                                </label>
+                                                                <input type="text" name="username" id="username"
+                                                                    placeholder="" value="<%=myProfile.userName%>" class="form-control tt1" disabled>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="" style="float: left;">
+                                                                    Mật khẩu
+                                                                </label>
+                                                                <div class="input-group">
+                                                                    <input type="text" name="input" id="inputMK"
+                                                                    placeholder="MKexample" class="form-control shadow-none tt1" value="" disabled>
+                                                                    <div class="input-group-append">
+                                                                        <button type="button" class="btn btn-outline-secondary" onclick="enable_disable()">Sửa</button>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                            </div>
+                                                        </form>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-success">Cập nhật</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Label  -->
+            <div class="col-6 pt-4">
+                <div class="row pt-5">
+
+                    <div class="col-8 py-5 border bg-light container"
+                        style="border-radius: 20px; box-shadow: silver  -0.5px 5px 5px;">
+
+                        <%if(locals.friend){%>
+                        <!-- <h2 class="text-center text-dark"> Avt: <%=friend.image_url%></h2> -->
+                        <div class="media mb-3 ml-5">
+                            <img src="<%=friend.image_url%>" alt="user" width="60" height="60"
+                                class="rounded-circle">
+                            <div class="media-body ml-4">
+                                <div>
+                                    <h2 class="mb-0"><%=friend.userName%></h2>
+                                    <h5 class="text-small">Email: <%=friend.email%></h5>
+                                    <h5 class="text-secondary font-italic">Gửi lời chào đến <b><%=friend.userName%></b> !</h5>
+                                </div>
+                                <form id="form_add_friend">
+                                    <input type="hidden" name="receiverId" id="receiverId" value="<%=friend._id%>">
+                                    <input type="hidden" name="userId" id="senderId" value="<%=senderId%>">
+                                    <%if(locals.sentRequest){%>
+                                        <input id="btnSendRequest" type="submit" class="btn btn-info" value="Đã gửi lời mời kết bạn ✓" disabled>
+                                    <%} else {%>
+                                        <input id="btnSendRequest" class="btn btn-info" type="submit" value="+ Thêm bạn">
+                                    <%}%>
+                                </form>
+                            </div>
+                        </div>
+                        
+                        <div class="container">
+                            <form action="/users" method="get">
+                                <input type="hidden" id="receiverId" value="<%=friend._id%>">
+                                <input type="hidden" name="userId" id="senderId" value="<%=senderId%>">
+                                <input type="text" id="message" style="height: 100px;" class="form-control"
+                                    placeholder="Nhập vào tin nhắn">
+                                <div class="d-flex justify-content-center">
+                                    <button type="submit" class="text-white btn btn-light mt-3 col-2" style="width: 300px;" id="btnBack" value="Quay lại">
+                                        <img src="/back.png" alt="" style="width: 40px;">
+                                    </button>
+                                    <div class="col-8"></div>
+                                    <button type="button" onclick="return sendMess()" class="text-white btn btn-light mt-3 col-2" style="width: 300px;" id="btnSend" value="Gửi">
+                                        <img src="/send.png" alt="" style="width: 40px;">
+                                    </button>
+                                </div>
+                                
+                            </form>
+                            
+                        </div>
+                        <%}%>
+                        <%if(locals.me){%>
+                            
+                            <h3 class="text-center text-dark mb-5"><strong><%=me.userName%></strong> đã có trong danh sách tin nhắn</h3>
+                            <div class="container">
+                                <form action="/users" method="get">
+                                    
+                                    <input type="hidden" name="userId" id="senderId" value="<%=me._id%>">
+                                    
+                                    <div class="d-flex justify-content-center">
+                                        <input type="submit" class="text-white btn btn-info mt-3 col-12"
+                                        style="width: 300px;" id="btnBack" value="Quay lại"/>
+                                    </div>
+                                </form>
+                                
+                            </div>
+                            <%}%>
+                        
+                            <p id="userSendMessage" hidden><%=senderId%></p>
+                        
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="row fixed-bottom border" id="footer">
+            <div class="text-center">
+                ©2021 Đồ án web chat: <b>Nhóm 7</b>
+            </div>
+        </div>
+
+
+
+    </div>
+    
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+          var socket = io();
+          const senderId = document.getElementById('senderId').value;
+          const receiverId = document.getElementById('receiverId').value;
+          const btnSend = document.getElementById('btnSend');
+          const btnBack= document.getElementById('btnBack');
+
+          $("#form_add_friend").on("submit",(e)=>{
+              e.preventDefault();
+                    $.ajax({
+                        type: "POST",
+                        data:{ userId: senderId, receiverId: receiverId},
+                        url: "/users/addFriend",
+                        success: function (data) {
+                            
+                            if(data.mess == "ok"){
+                                $("#btnSendRequest").val("Đã gửi !");
+                                $("#btnSendRequest").attr("disabled",true);
+                            }
+                        }
+            });
+        });
+          
+
+           
+          socket.emit("addUser", {userId:senderId});
+
+          function sendMess(){
+            if(document.getElementById('message').value == ''){
+                document.getElementById("message").value = '';
+            }else{
+                socket.emit("sendMessage", {
+                senderId: senderId,
+                receiverId: receiverId,
+                text: document.getElementById('message').value,
+                });
+                btnSend.style.visibility = "hidden";
+            }
+          }
+    </script>
+</body>
+</html>

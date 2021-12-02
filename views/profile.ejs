@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/squib-ico.ico">
+    <title>Squib Chat</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body class="snow-bg">
+    <div class="container-fluid">
+        <div class="row bg-white border">
+            <div class="col-2">
+
+                <a href="/users?userId=<%=user._id%>" style="text-decoration: none;">
+                    <img src="/squib3.png" alt="" style="width: 75px; height:70px; float: left;">
+                </a>
+
+
+            </div>
+            <div class="col-8">
+
+            </div>
+            <div class="col-2">
+                <div class="row mt-3">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6 pt-4">
+                <div class="row pt-5">
+                    <div class="col-8 py-3 bg-light container" style="border-radius: 20px; box-shadow: silver  -0.5px 5px 5px;">
+                        <h2 class="mb-5">Thay đổi mật khẩu</h2>
+                        
+                        <div class="media mb-3 ml-5">
+                            <img src="<%=user.image_url%>" alt="user" width="60" height="60"
+                                class="rounded-circle">
+                            <div class="media-body ml-4">
+                                <div>
+                                    <h2 class="mb-0"><%=user.userName%></h2>
+                                    <h5 class="text-small">Email: <%=user.email%></h5>
+                                </div>
+                            </div>
+                        </div>
+                        <form id="form-change-pass" class="col-7">
+                            <div class="input-group-append">
+                                <input type="hidden" id="userId" value="<%=user._id%>">
+                                <input type="text" class="form-control" id="old_pass" name="old_pass" required placeholder="Mật khẩu hiện tại">
+                                <span id="tbOld_pass" class="ml-3" style="color: red;">*</span>
+                            </div>
+                             <div class="input-group-append mt-3">
+                                <input type="text" id="new_pass" class="form-control" name="new_pass" required placeholder="Mật khẩu mới">
+                                <span id="tbNew_pass" class="ml-3" style="color: red;">*</span>
+                                
+                             </div>
+                             <div style="color: red; height: 20px;" id="saimk" class="mt-1"></div>
+                             <div style="color: red; height: 20px;margin-bottom: 25px;" id="tb" class="mt-1"></div>
+                             <input type="submit" class="btn btn-info mt-2" value="Đổi mật khẩu">
+                        </form>
+
+                        <button class="btn btn-light mb-5"><a href="/users?userId=<%=user._id%>" class="text-decoration-none"><img src="/back.png" alt="" style="width: 40px;"></a></button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row fixed-bottom border" id="footer">
+            <div class="text-center">
+                ©2021 Đồ án web chat: <b>Nhóm 7</b>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        const newPass = $('#new_pass');
+        function kt_new_pass(){
+            const regex = /^(?=.*\d)[a-zA-Z\d]{8,}$/;
+            if(!(regex.test(newPass.val()))){
+                $('#tb').text("Mật khẩu mới ít nhất phải 8 kí tự và gồm chữ và số ");
+                return false;
+            }
+            return true;
+        }
+        newPass.blur(kt_new_pass);
+
+        $('#form-change-pass').on('submit', (e) => {
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                data: { userId: document.getElementById('userId').value, old_pass: document.getElementById('old_pass').value, new_pass: document.getElementById('new_pass').value },
+                url: "/auth/change-password",
+                success: function (data) {
+                    if (data.mess == "saimk") {
+                        document.getElementById('saimk').innerHTML = "Sai mật khẩu hiện tại";
+                    } else if (data.mess == "ok") {
+                        alert('Đổi mật khẩu thành công');
+                        document.getElementById('saimk').innerHTML = "";
+                        document.getElementById('new_pass').value = "";
+                        document.getElementById('old_pass').value = "";
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

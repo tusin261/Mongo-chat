@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/squib-ico.ico">
+    <title>Squib Chat</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/emojionearea.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/javascript.js"></script>
+    <script src="js/emojionearea.min.js"></script>
+    
+</head>
+
+<body class="snow-bg">
+    <div class="container-fluid">
+<!-- Header -->
+        <div class="row bg-white border">
+            <div class="col-2">
+                <a href="/users?userId=<%=senderId%>" style="text-decoration: none;">
+                    <img src="/squib3.png" alt="" style="width: 75px; height:70px; float: left;">
+                </a>
+            </div>
+            <div class="col-7" id="tb">
+            </div>
+            <div class="col-2">
+                <div class="row mt-2">
+                    <div class="dropdown mt-3" style="cursor: pointer;" id="thongbaodanger">
+                        <div class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-bell" aria-hidden="true"><div id="thongbaodiv"></div></i>
+                            <!-- <div class="reddot" ></div>  -->
+                        </div>
+                        <div class="dropdown-menu dropdown-menu-left mr-5">
+                            <p class="dropdown-item" id="thongbao"></p>
+                        </div>
+                    </div>
+
+                    <div class="dropdown" style="cursor: pointer;">
+                        <div class="dropdown-toggle" data-toggle="dropdown"><img class="rounded-circle"
+                                src="<%=myProfile.image_url%>" alt="" style="width:50px; height: 50px;"></div>
+                        <div class="dropdown-menu dropdown-menu-left mr-5">
+                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalUser">Thông tin tài khoản</a>
+                            <a class="dropdown-item" href="/">Đăng xuất</a>
+                        </div>
+
+<!-- MODAL thông tin tài khoản -->
+                        <div class="modal fade" id="modalUser" role="dialog" style="cursor: default;">
+                            <div class="modal-dialog ">
+                                <div class="modal-content" style="border-radius: 20px;">
+                                    <div class="col-12">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Thông tin tài khoản</h4>
+                                            <input type="button" class="close btn shadow-none" data-dismiss="modal" value="X">
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="col-12 bg-white">
+                                                <div class="row"
+                                                    style="background-image: url(/background.jpg); background-position: center; height: 200px;">
+                                                </div>
+                                                <div class="row bg-white">
+                                                    <img src="<%=myProfile.image_url%>" alt="" width="80" height="80" class="rounded-circle"
+                                                        style="position: absolute; left: 176px; top: 160px;">
+                                                    <div>
+                                                        <h4 for="" class="mt-5">
+
+                                                        </h4>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <form action="" class="mt-5">
+                                                            <div class="form-group">
+                                                                <label for="username" style="float: left;">
+                                                                    Email
+                                                                </label>
+                                                                <input type="text" name="username" id="username"
+                                                                    placeholder="" class="form-control tt1" value="<%=myProfile.email%>" disabled>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="username" style="float: left;">
+                                                                    Username
+                                                                </label>
+                                                                <input type="text" name="username" id="username"
+                                                                    placeholder="" class="form-control tt1" value="<%=myProfile.userName%>" disabled>
+                                                            </div>
+                                                            <a href="/users/user-info/<%=myProfile._id%>" class="text-decoration-none">Thay đổi mật khẩu</a>
+                                                        </form>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-1" id="tb"></div>
+        </div>
+
+<!-- Center -->
+        <div class="row" id="trungtam">
+            <!-- Main menu -->
+            <div class="col-1" style="background-color: #199054;">
+                <div class="row mt-3">
+                    <ul class="nav nav-pills flex-column ">
+                        <li class="nav-item pill-1 mb-3">
+                            <a class="nav-link active" data-toggle="" href="/users?userId=<%=senderId%>">
+                                <img src="/messenger.png" alt="" style=" width: 40px;">
+                            </a>
+                        </li>
+                        <li class="nav-item pill-2 mb-3">
+                            <a class="nav-link" href="/users/listRequest?userId=<%=senderId%>">
+                                <img src="/address-book.png" alt="" style="width: 40px; ">
+                            </a>
+                        </li>
+
+                        <!-- <li class="nav-item pill-3 mb-3">
+                            <a class="nav-link " data-toggle="tab" href="#menu3">
+                                <img src="/account.png" alt="" style=" width: 40px;">
+                            </a>
+                        </li> -->
+
+                    </ul>
+                </div>
+
+
+            </div>
+            <!-- Content main Menu -->            
+            <div class="col-3 border bg-white">
+                <div class="col-12">
+                    <div class="row">
+                        <form action="/users/search" method="get" class="col-12">
+                            <div class="input-group m-2">
+                                <input type="hidden" value="<%=senderId%>" name="senderId">
+                                <input type="text" name="friendName" class="form-control shadow-none"
+                                    placeholder="Tìm kiếm" style="border-radius: 50px;" id="searchName" />
+                                <div class="input-group-append ml-1" id="btsearch">
+                                    <button type="submit" class="btn shadow-none"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                        
+                        <h5 class="font-italic text-center col-12" style="height: 25px;">
+                            <%if(locals.noti){%>
+                                <p><%=noti%></p>
+                            <%}%>
+                        </h5>
+                    </div>
+
+                    <div class="row border-top">
+                        <div class="container tab-content">
+                            <!-- Tin nhắn -->
+                            <div id="home" class="tab-pane active">
+                                <div class="px-4 py-2 bg-light">
+                                    <div class="row">
+                                        <div class="h5 mb-0 py-1 col-9">Danh sách tin nhắn</div>
+                                        <div class="col-3 " >
+ <!-- Add group chat -->
+                                            <button id="btsearch" class="btn shadow-none fa" style="border-radius: 50px;" data-toggle="modal" data-target="#modalGroup">
+                                                <img src="/add-group.svg" class="" style="width: 20px;">
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- <div class="h5 mb-0 py-1 dropdown-toggle" data-toggle="dropdown" style="text-align: center;">Danh sách tin nhắn</div>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">Link 1</a>
+                                        <a class="dropdown-item" href="#">Link 2</a>
+                                        <a class="dropdown-item" href="#">Link 3</a>
+                                      </div> -->
+                                </div>
+                                
+                                <div class="messages-box">
+                                    <div class="list-group">
+                                        <%if(locals.list_conversation){%>
+                                        <%for(let i=0;i<list_conversation.length;i++){%>
+                                        <input type="hidden" value="<%=list_conversation[i].friendId%>" name="receiverId" id="receiverId">
+                                        <form action="/messages/getMessage" method="get" class="list-group-item list-group-item-action list-group-item-light m-0 p-0">
+                                            <div class="media">
+                                                <input type="hidden" value="<%=senderId%>" name="senderId"
+                                                    id="senderId">
+                                                <input type="hidden" value="<%=list_conversation[i].friendId%>"
+                                                    name="receiverId" id="receiverId">
+                                                <input type="hidden" value="<%=list_conversation[i].conversationId%>"
+                                                    name="conversationId" id="conversationId">
+                                                <!-- Sender -->
+                                                <button type="submit" class="btn shadow-none d-flex col-12" >
+                                                    <div>
+                                                        <img src="<%=list_conversation[i].friendImg%>" alt="user" width="50" height="50" class="rounded-circle mx-4" id="conversation">
+                                                    </div>
+                                                    <div class="flex-grow-1">
+                                                        <h4 class="mt-2 mx-5" style="color: black; text-align: left;"><%=list_conversation[i].friendName%></h4>
+                                                    </div>
+                                                    <!-- Thông báo -->
+                                                    <div class="align-self-center"><span class="badge badge-danger" id="thongbao" style="border-radius: 50%;"></span></div>
+                                                </button>
+                                                <div class="media-body ml-4">
+                                                    
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <%}%>
+                                        <%}%>
+                                        <!-- CHAT GROUP -->
+                                        <%if(locals.listGroup){%>
+                                        <%for(let i=0;i<listGroup.length;i++){%>
+                                            <form action="/messages/getMessage" method="get" class="list-group-item list-group-item-action list-group-item-light m-0 p-0">
+                                                <div class="media">
+                                                    
+                                                    <input type="hidden" value="<%=senderId%>" name="senderId"
+                                                        id="senderId">
+                                                        <input type="hidden" value="<%=listGroup[i]._id%>"
+                                                            name="conversationId">
+                                                    <button type="submit" class="btn shadow-none d-flex col-12 clickme" id="submitInGroup"> 
+                                                        <div>
+                                                            <img src="<%=listGroup[i].imgConversation%>" alt="group" width="50" height="50" class="rounded-circle mx-4" id="conversation"> 
+                                                        </div>
+                                                        <div class="flex-grow-1">
+                                                            <h4 class="mt-2 mx-5" style="color: black; text-align: left;"><%=listGroup[i].nameConversation%></h4>
+                                                        </div>
+                                                        <!-- Thông báo -->
+                                                        <div class="align-self-center"><span class="badge badge-danger" style="border-radius: 50%;"></span></div>
+                                                    </button>
+                                                    
+                                                </div>
+                                            </form>
+                                        <%}%>
+                                        <%}%>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- User Sended -->
+            <div class="col-6 border mb-5 ">
+                <!-- Header -->
+                <%if(locals.friendProfile){%>
+                <div class="row bg-light" style="height: 65px;">
+                    <div class="col-9 px-4 py-2">
+                        <!-- THỬ NGHIỆM, Hiển thị chay -->
+                        <div class="media">
+                            <img src="<%=friendProfile.image_url%>" alt="user" width="50" height="50"
+                                class="rounded-circle">
+                            <div class="media-body ml-4">
+                                <div class="mt-2">
+                                    <h3><%=friendProfile.userName%></h3>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <!-- HIỂN THỊ ĐÚNG -->
+                        
+                    </div>
+                    <div class="col-3 pt-1">
+                        <div class="row mt-2">
+                            <form id="form_add_friend">
+                                <input type="hidden" name="receiverId" id="receiverId" value="<%=receiverId%>">
+                                <input type="hidden" name="userId" id="senderId" value="<%=senderId%>">
+                                <%if(locals.sentRequest){%>
+                                    <input id="btnSendRequest" type="submit" class="btn btn-info" value="Bạn bè ✓" disabled>
+                                <%} else {%>
+                                    <input id="btnSendRequest" type="submit"  class="btn btn-info" value="+ Thêm bạn">
+                                <%}%>
+                            </form>
+                        </div>
+                        
+                    </div>
+                </div>
+                <%}%>
+                <%if(locals.in4Group){%>
+                    <div class="row bg-light" style="height: 65px;">
+                        <div class="col-9 px-4 py-2">
+                            <!-- THỬ NGHIỆM, Hiển thị chay -->
+                            <div class="media">
+                                <img src="<%=in4Group.imgConversation%>" alt="user" width="50" height="50"
+                                    class="rounded-circle">
+                                <div class="media-body ml-4">
+                                    <div class="mt-2">
+                                        <h3><%=in4Group.nameConversation%></h3>
+                                    </div>
+                                </div>
+                                <p><%=in4Group.members.length%> thanh vien</p>
+                            </div>
+                            <!-- HIỂN THỊ ĐÚNG -->
+                            
+                        </div>
+                        <div class="col-3">
+                        </div>
+                    </div>
+                <%}%>
+                <!-- Chat -->
+                <div class="chat-box px-3" id="chat-box">
+                    <div class="chat" id="chat"> 
+                        <%if(locals.list_message){%>
+                        <%for(let y=0;y<list_message.length;y++){%>
+                            <!-- Người nhận - BÊN TRÁI -->
+                            <%if(list_message[y].senderId != senderId){%>
+                            <div class="list-group flex-row" >
+                                <div class="row">
+                                    <div class="list-group-item" style="border: none;">
+                                        <div class="media">
+                                            <img class="img-chat" src="<%=friendProfile.image_url%>">
+                                            <div class="media-body">
+                                                <%if(list_message[y].type == 'text'){%>
+                                                    <p class="text-chat ml-2"><%=list_message[y].content%></p>
+                                                <%} else if(list_message[y].type == 'image'){%>
+                                                    <img class="image-chat ml-2" src="<%=list_message[y].content%>" alt="" >
+                                                <%}else{%>
+                                                    <p class="text-chat ml-2">file name</p>
+                                                <%}%>
+                                                <div class="ml-2"><%=moment(list_message[y].createdAt).format('DD/MM, h:mm a')%></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <%} else {%>
+                            <!-- Người gửi - BÊN PHẢI -->
+                            <div class="list-group flex-row-reverse">
+                                <div class="row">
+                                    <div class="list-group-item" style="border: none;">
+                                        <div class="media">
+                                            <div class="media-body">
+                                                <%if(list_message[y].type == 'text'){%>
+                                                    <p class="text-chat mr-2"><%=list_message[y].content%></p>
+                                                <%} else if(list_message[y].type == 'image'){%>
+                                                    <img class="image-chat mr-2" src="<%=list_message[y].content%>" alt="" >
+                                                <%}else{%>
+                                                    <p class="text-chat mr-2">file name</p>
+                                                <%}%>
+                                                <div class="mr-2 d-flex justify-content-end"><%=moment(list_message[y].createdAt).format('DD/MM, h:mm a')%></div>
+                                            </div>
+                                            <img class="img-chat" src="<%=myProfile.image_url%>">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <%}%>
+                            <%}%>
+                        <%}%>
+                    </div>    
+                </div>
+
+                <!-- Typing area -->
+                <%if(locals.friendProfile){%>
+                <div class="col-12 position-fixed bg-white" style="bottom: 0; width: 45%; margin-bottom: 45px;">
+                    <div class="row">
+                        <div class="col-10 ">
+                            <div class="input-group border border-left-0 mb-2" style="border-radius: 50px;" id="borderText">
+                                <textarea type="text" class="form-control shadow-none p-3 bg-light border border-right-0" id="myText"
+                                    placeholder="Type a message" onkeyup="cleartb()" style="border-radius: 50px; height: 70px; border: hidden;"></textarea>
+                                <div class="input-group-append">
+                                    <%if(locals.receiverId){%>
+                                        <input type="hidden" id="myReceiverId" value="<%=receiverId%>">
+                                    <%}%>
+                                    <%if(locals.conversationId){%>
+                                        <input type="hidden" id="myConversation" value="<%=conversationId%>">
+                                    <%}%>
+                                    <div>
+                                        <button onclick="return sentMess2()" class="btn shadow-none">
+                                            <img id="btsend" src="/send.png" alt="" class="mt-2" style="width: 40px; transition: 0.35s;">
+                                        </button>
+                                    </div>
+                                    
+                                    <div>
+                                        <label for="image-upload" class="btn shadow-none">
+                                            <img src="/image3.png" style="width: 40px;" class="mt-2" alt="">
+                                            <input type="file" id="image-upload" style="display:none;" accept="image/png, image/jpeg, image/jpg">
+                                        </label>
+                                        
+                                    </div>
+                                    
+                                    <!-- <div>
+                                        <label for="file-upload" class="btn shadow-none">
+                                            <img src="/file.png" style="width: 40px;" class="mt-2" alt="">
+                                            <input type="file" id="file-upload" style="display:none;" accept=".pdf,.doc,.xlsx">
+                                        </label>    
+                                    </div>     -->
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <%}%>
+                <%if(locals.in4Group){%>
+                    <div class="col-12 position-fixed bg-white" style="bottom: 0; width: 45%; margin-bottom: 45px;">
+                        <div class="row">
+                            <div class="col-10 ">
+                                <div class="input-group border border-left-0 mb-2" style="border-radius: 50px;" id="borderText">
+                                    <textarea type="text" class="form-control shadow-none p-3 bg-light border border-right-0" id="myText"
+                                        placeholder="Type a message" style="border-radius: 50px; height: 70px; border: hidden;"></textarea>
+                                    <div class="input-group-append">
+                                        <%if(locals.receiverId){%>
+                                            <input type="hidden" id="myReceiverId" value="<%=receiverId%>">
+                                        <%}%>
+                                        
+                                        <div>
+                                            <%if(locals.conversationId){%>
+                                                <input type="hidden" id="myConversation" value="<%=conversationId%>">
+                                            <%}%>
+                                            <button class="btn shadow-none">
+                                                <img id="btsend" src="/send.png" alt="" class="mt-2" style="width: 40px; transition: 0.35s;">
+                                            </button>
+                                        </div>
+                                        
+                                        <div>
+                                            <label for="image-upload" class="btn shadow-none">
+                                                <img src="/image3.png" style="width: 40px;" class="mt-2" alt="">
+                                                <input type="file" id="image-upload" style="display:none;" accept="image/png, image/jpeg, image/jpg">
+                                            </label>
+                                            
+                                        </div>
+                                        
+                                        <div>
+                                            <label for="file-upload" class="btn shadow-none">
+                                                <img src="/file.png" style="width: 40px;" class="mt-2" alt="">
+                                                <input type="file" id="file-upload" style="display:none;" accept=".pdf,.doc,.xlsx">
+                                            </label>    
+                                        </div>    
+                                    </div>
+                                </div>
+    
+                            </div>
+                        </div>
+                    </div>
+                <%}%>
+
+            </div>
+            
+            <div class="col-2 border bg-white">
+                <%if(locals.friendProfile){%>
+                <div class="row bg-light" style="height: 65px;"><h4 class="text-center mt-3">Thông tin hội thoại</h4></div>
+                <div class="col-12">
+                    <img src="<%=friendProfile.image_url%>" alt="user" width="60" height="60"
+                        class="rounded-circle d-flex justify-content-center">
+                    <h3 for="" class="d-flex justify-content-center"><%=friendProfile.userName%></h3>
+                </div>
+                <h5 class="border-top">Hình đã gửi</h5>
+                <div class="row pl-2">
+                    <%for(let i=0;i<list_message.length;i++){%>
+                        <%if(list_message[i].type == 'image'){%>
+                    <div class="row m-1 " style=" width:fit-content;">
+                        <img id="myImg" src="<%=list_message[i].content%>" style="width:90px; height:90px; position: relative;" class="border"  data-toggle="modal" data-target="#modalImage<%=list_message[i]._id%>">
+                    </div>
+                        <%}%>
+                    <%}%>
+                </div>
+                <%}%>
+            </div>
+            
+            <%if(locals.in4Group){%>
+                
+                <div class="col-2 border bg-white">
+                    <div class="row bg-light" style="height: 65px;"><h4 class="text-center mt-3">Thông tin hội thoại</h4></div>
+                    <div class="col-12">
+                        <img src="<%=in4Group.imgConversation%>" alt="user" width="60" height="60"
+                            class="rounded-circle d-flex justify-content-center"/>
+                        <h3 class="d-flex justify-content-center"><%=in4Group.nameConversation%></h3>
+                        <p><%=in4Group.members.length%> thanh vien</p>
+                    </div>
+                    <h5 class="border-top">Hình đã gửi</h5>
+                    <div class="row">
+                        
+                    </div>
+                </div>
+                <%}%>
+        </div>
+
+        <!-- Modal kho lưu trữ -->
+        <%if(locals.friendProfile){%>
+            <%for(let i=0;i<list_message.length;i++){%>
+                <%if(list_message[i].type == 'image'){%>
+        <div class="modal fade bd-example-modal-lg show" id="modalImage<%=list_message[i]._id%>" role="dialog" tabindex='-1'>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    
+                        
+                    <div class="modal-body" id="dynamic-content">
+                        <img src="<%=list_message[i].content%>" class="img-fluid" alt=""/>
+                    </div>
+                       
+
+                </div>
+            </div>
+        </div>
+        <%}%>
+        <%}%>
+        <%}%> 
+        
+        
+        <div class="row fixed-bottom border" id="footer">
+            <div class="text-center">
+                ©2021 Đồ án web chat: <b>Nhóm 7</b>
+                <p id="cc"></p>
+            </div>
+        </div>
+        
+        
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
+    <script>
+        var socket = io();
+        var form = document.getElementById('formchat');
+
+        var userId = document.getElementById('senderId').value;
+        var receiverId = document.getElementById('myReceiverId').value;
+        var conversationId = document.getElementById('myConversation').value;
+        var chatDiv = document.getElementById('chat');
+        var chatBox = document.getElementById('chat-box');
+        function updateScroll(){   
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+        function enable_disable() {
+            $("#inputMK").prop('disabled', false);
+        }
+        socket.emit("addUser", {
+            userId:document.getElementById('senderId').value
+        });
+        
+        function cleartb(){
+            document.getElementById('thongbao').style.visibility = "hidden";
+            document.getElementById('thongbaodiv').style.visibility = "hidden";
+        }
+
+
+        document.getElementById('image-upload').addEventListener('change',()=>{
+            const myimg = document.getElementById('image-upload').files[0];
+            const fileSize = document.getElementById('image-upload').files[0].size;
+            if(fileSize <= 4194304){
+                const reader = new FileReader();
+                reader.onloadend = ()=>{
+                socket.emit('sendImage', {
+                    img:reader.result,
+                    senderId: userId,
+                    receiverId: receiverId,
+                    conversationId:conversationId
+                });
+            }
+                reader.readAsDataURL(myimg);
+            }else{
+                alert('File vuot qua dung luong');
+                document.getElementById('image-upload').value = '';
+            } 
+        });
+
+        updateScroll();
+        
+        
+        function sentMess2() {
+
+            if(document.getElementById("myText").value == ''){
+                document.getElementById("myText").value = '';
+            }
+            else{
+                socket.emit("sendMessage", {
+                senderId: userId,
+                receiverId: receiverId,
+                text: document.getElementById("myText").value,
+                conversationId:conversationId
+            });
+            
+            document.getElementById("myText").value = '';
+            } 
+        }
+
+
+        socket.on("getMessage", data => {
+            var divthongbao = document.getElementById("thongbaodiv");
+            var thongbao = document.getElementById('thongbao');
+            var div_listgroup = document.createElement('DIV');
+            var div_listgroup2 = document.createElement('DIV');
+            var div_row = document.createElement('DIV');
+            var div_listgroupitem = document.createElement('DIV');
+            var div_media = document.createElement('DIV');
+            var img_chat = document.createElement('img');
+            var div_mediabody = document.createElement('DIV');
+            // var text_chat = document.createElement('P');
+            // var div_time = document.createElement('DIV');
+
+            var text_chat_left = document.createElement('P');
+            var text_chat_right = document.createElement('P');
+            var div_time_left = document.createElement('DIV');
+            var div_time_right = document.createElement('DIV');
+
+            div_listgroup.classList.add('list-group',"flex-row");
+            div_listgroup2.classList.add('list-group',"flex-row-reverse");
+            div_row.classList.add('row');
+            div_listgroupitem.classList.add('list-group-item');
+            div_listgroupitem.style.border = "none";
+            div_media.classList.add('media');
+            img_chat.classList.add('img-chat');
+            div_mediabody.classList.add('media-body');
+            img_chat.src = data.urlImg;
+            
+            
+             // LEFT
+            text_chat_left.classList.add('text-chat','ml-2');
+            text_chat_left.textContent = `${data.content}`;
+            div_time_left.classList.add('ml-2');
+            div_time_left.textContent = `${moment(data.time).format("DD/MM, h:mm a")}`;
+
+            // RIGHT
+            text_chat_right.classList.add('text-chat', 'mr-2','d-flex','justify-content-end');
+            text_chat_right.textContent = `${data.content}`;
+            div_time_right.classList.add('mr-2','d-flex','justify-content-end');
+            div_time_right.textContent = `${moment(data.time).format("DD/MM, h:mm a")}`;
+
+            if(data.senderId != userId){
+                div_listgroup.appendChild(div_row);
+                div_row.appendChild(div_listgroupitem);
+                div_listgroupitem.appendChild(div_media);
+                div_media.appendChild(img_chat);
+                div_media.appendChild(div_mediabody);
+                div_mediabody.appendChild(text_chat_left);
+                div_mediabody.appendChild(div_time_left);
+                chatDiv.appendChild(div_listgroup);
+                // divthongbao.appendChild(thongbaodiv);
+                divthongbao.classList.add('reddot');
+                thongbao.textContent = `1 tin nhắn mới từ ${data.nameSender}`;
+                //setInterval(updateScroll,1000);
+                updateScroll();
+                divthongbao.style.visibility = "visible";
+                thongbao.style.visibility = "visible";
+            }else{
+                div_listgroup2.appendChild(div_row);
+                div_row.appendChild(div_listgroupitem);
+                div_listgroupitem.appendChild(div_media);
+                div_media.appendChild(div_mediabody);
+                div_mediabody.appendChild(text_chat_right);
+                div_mediabody.appendChild(div_time_right);
+                div_media.appendChild(img_chat);
+                chatDiv.appendChild(div_listgroup2);
+                //setInterval(updateScroll,100);
+                updateScroll();
+            }
+                    
+        });
+
+        socket.on("getImage", data => {
+            var divthongbao = document.getElementById("thongbaodiv");
+            var thongbao = document.getElementById("thongbao");
+            var div_listgroup = document.createElement('DIV');
+            var div_listgroup2 = document.createElement('DIV');
+            var div_row = document.createElement('DIV');
+            var div_listgroupitem = document.createElement('DIV');
+            var div_media = document.createElement('DIV');
+            var img_chat = document.createElement('img');
+            var div_mediabody = document.createElement('DIV');
+            // var text_chat = document.createElement('P');
+            // var div_time = document.createElement('DIV');
+
+            var img_chat_left = document.createElement('img');
+            var img_chat_right = document.createElement('img');
+            var div_time_left = document.createElement('DIV');
+            var div_time_right = document.createElement('DIV');
+
+            div_listgroup.classList.add('list-group',"flex-row");
+            div_listgroup2.classList.add('list-group',"flex-row-reverse");
+            div_row.classList.add('row');
+            div_listgroupitem.classList.add('list-group-item');
+            div_listgroupitem.style.border = "none";
+            div_media.classList.add('media');
+            img_chat.classList.add('img-chat');
+            div_mediabody.classList.add('media-body');
+            img_chat.src = data.urlImg;
+            
+           
+
+             // LEFT
+            img_chat_left.classList.add('ml-2', 'image-chat');
+            img_chat_left.src = data.content;
+            div_time_left.classList.add('ml-2');
+            div_time_left.textContent = `${moment(data.time).format("DD/MM, h:mm a")}`;
+            // RIGHT
+
+            img_chat_right.classList.add('mr-2','d-flex','justify-content-end', 'image-chat');
+            img_chat_right.src = data.content;
+            div_time_right.classList.add('mr-2','d-flex','justify-content-end');
+            div_time_right.textContent = `${moment(data.time).format("DD/MM, h:mm a")}`;
+
+            if(data.senderId != userId){
+                div_listgroup.appendChild(div_row);
+                div_row.appendChild(div_listgroupitem);
+                div_listgroupitem.appendChild(div_media);
+                div_media.appendChild(img_chat);
+                div_media.appendChild(div_mediabody);
+                div_mediabody.appendChild(img_chat_left);
+                div_mediabody.appendChild(div_time_left);
+                chatDiv.appendChild(div_listgroup);
+                divthongbao.classList.add('reddot');
+                thongbao.textContent = `1 tin nhắn mới từ ${data.nameSender}`;
+                updateScroll();
+                divthongbao.style.visibility = "visible";
+                thongbao.style.visibility = "visible";
+            }else{
+                div_listgroup2.appendChild(div_row);
+                div_row.appendChild(div_listgroupitem);
+                div_listgroupitem.appendChild(div_media);
+                div_media.appendChild(div_mediabody);
+                div_mediabody.appendChild(img_chat_right);
+                div_mediabody.appendChild(div_time_right);
+                div_media.appendChild(img_chat);
+                chatDiv.appendChild(div_listgroup2);
+                updateScroll();
+            }
+            
+        })
+        socket.on("getUser", users => {
+            console.log(users);
+        });
+
+        
+
+
+        $("#form_add_friend").on("submit",(e)=>{
+              e.preventDefault();
+                    $.ajax({
+                        type: "POST",
+                        data:{ userId: userId, receiverId: receiverId},
+                        url: "/users/addFriend",
+                        success: function (data) {
+                            if(data.mess == "ok"){
+                                $("#btnSendRequest").val("Đã gửi !");
+                                $("#btnSendRequest").attr("disabled",true);
+                            }
+                        }
+            });
+        });
+
+    </script>
+    <script>
+        // Get the modal
+        var modal = document.getElementById("myModalImg");
+        
+        // Get the image and insert it inside the modal - use its "alt" text as a caption
+        var img = document.getElementById("myImg");
+        var modalImg = document.getElementById("img01");
+        var captionText = document.getElementById("caption");
+        img.onclick = function(){
+          modal.style.display = "block";
+          modalImg.src = this.src;
+          captionText.innerHTML = this.alt;
+        }
+        
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("closeImg")[0];
+        
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() { 
+          modal.style.display = "none";
+        }
+    </script>
+    
+</body>
+
+</html>

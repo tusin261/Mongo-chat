@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/squib-ico.ico">
+    <title>Đăng nhập</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Oleo+Script' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/javascript.js"></script>
+</head>
+
+<body class="snow-bg">
+    <div class="container-fluid">
+        <div class="col-10">
+            <div class="row">
+                <!-- Phần Jumbotron -->
+                <div class="col-6 p-5">
+                    <form action="" class="p-4 ">
+                        <div class="form-group">
+                            <img src="squib3.png" alt="">
+                            <p>
+                            <h1 style="color: rgba(10, 10, 10, 0.712)">Trải nghiệm mới mẽ.</h1>
+                            <h2 style="color: rgba(10, 10, 10, 0.712)">Kết nối với nhau thật dễ dàng !</h2>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Label đăng nhập -->
+                <div class="col-6 pt-4">
+                    <div class="row pt-5">
+                        <div class="col-8 pt-5 border bg-light"
+                            style="border-radius: 20px; box-shadow: silver  -0.5px 5px 5px;">
+
+                            <!-- <form action="/auth/google" method="get"> -->
+                            <form id="form-submit" action="/auth" method="post">
+                                <h3 class="text-center text-info">Đăng nhập</h3>
+                               
+                                <div class="form-group">
+                                    <label for="usernam" class="text-info">Tài khoản</label>
+                                    <span id="" class="ml-3 text-danger">
+                                        <%if(locals.chuakichhoat){%>
+                                            <b>Tài khoản của bạn chưa được kích hoạt</b>
+                                        <%}%>
+                                        <%if(locals.tontai){%>
+                                            <b>Tài khoản của bạn vừa đăng ký đã tồn tại. Vui lòng đăng ký tài khoản khác</b>           
+                                            <%}%>
+                                    </span> <br>
+                                    <input type="text" name="email" id="usernam" placeholder="Nhập vào email"
+                                        class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="text-info">Mật khẩu</label> 
+                                    <span id="" class="ml-3 text-danger">
+                                        <%if(locals.saimk){%>
+                                            <b>* Sai mật khẩu</b>
+                                        <%}%>
+                                        <%if(locals.saiemail){%>
+                                            <b>* Sai email</b>
+                                        <%}%>
+                                    </span> <br>
+                                    <input type="password" name="password" id="passwor" placeholder="Nhập vào mật khẩu"
+                                        class="form-control">
+
+                                </div>
+                                <div class="form-group">
+                                    <div class=" mb-3">
+                                        <input type="submit" name="submitDangnhap"
+                                            class=" btn btn-info btn-md bg-info col-12"
+                                            style=" border:none; color:white" value="Đăng nhập" onclick="dangnhap()">
+                                    </div>
+                                </div>
+                                
+                            </form>
+                            <!-- Đăng kí                 -->
+                            <div id="register-link" class="form-group text-center">
+                                <p> Bạn chưa có tài khoản ?
+                                    <a href="#" class="text-success" style="text-decoration: none;"
+                                        data-toggle="modal" data-target="#myModal"> Đăng
+                                        ký</a>
+                                </p>
+                                <!-- Modal Đăng kí                     -->
+                                <div class="modal fade" id="myModal" role="dialog" data-backdrop="static">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content" style="border-radius: 20px;">
+                                            <div class="col-12">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Đăng ký</h4>
+                                                    <input type="button" class="close btn shadow-none"
+                                                        data-dismiss="modal" value="X">
+                                                </div>
+                                                <!-- Main -->
+                                                <div class="modal-body">
+                                                    <form action="/auth/register" method="post" enctype="multipart/form-data">
+                                                        <div class="form-group">
+                                                            <label for="Email" style="float: left;"> Email 
+                                                                <span id="er1">(*)</span></label>
+                                                            <input type="text" name="email" id="email"
+                                                                placeholder="Nhập địa chỉ email" class="form-control tt1"
+                                                                onblur="ktraemail()"
+                                                                title="Ví dụ: example123@gmail.com">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="username" style="float: left;">Tên người dùng
+                                                                <span id="er2">(*)</span>
+                                                            </label>
+                                                            <input type="text" name="user_name" id="username"
+                                                                placeholder="Nhập vào tên bạn muốn sử dụng" class="form-control tt2"
+                                                                onblur="ktrausername()"
+                                                                title="Lớn hơn 8 kí tự và không vượt quá 20 kí tự, có thể có, viết liền không khoảng trắng. Ví dụ: example1">
+
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="password" style="float: left;">Mật khẩu
+                                                                <span id="er3">(*)</span>
+                                                            </label>
+                                                            <input type="password" name="password" id="password"
+                                                                placeholder="Nhập vào mật khẩu" class="form-control tt3"
+                                                                onblur="ktrapw()"
+                                                                title="Lớn hơn 8 kí tự, mật khẩu bao gồm chữ và số. VD: abcd1234">
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="" style="float: left;"> Hình đại diện <span id="" class="invisible">(*)</span></label>
+                                                                <input type="file" accept=".png, .jpg, .jpeg, .gif" name="image" id="fileUpload"
+                                                                placeholder="Chọn hình đại diện" class="form-control shadow-none" style="border: none;"
+                                                                onblur="" multiple>
+                                                                <div id="image-holder" class="d-flex" style="height: 100px;">
+                                                                <%if(locals.bigFile){%>
+                                                                    <p>File quá lớn</p>
+                                                                <%}%>
+                                                                
+                                                                
+                                                                </div>
+                                                        </div>
+
+                                                        
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class=" mb-3">
+                                                        <input type="submit" name="submitDangki"
+                                                            class=" btn btn-info btn-md bg-success col-12"
+                                                            style=" border:none; margin-top: 20px; color:white"
+                                                            value="Đăng kí" onclick="dangki()" id="btnDangki" disabled>
+                                                    </div>
+                                                </div>
+
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <div class="row fixed-bottom border" id="footer">
+        <div class="text-center">
+            ©2021 Đồ án web chat: <b>Nhóm</b>
+        </div>
+    </div>
+
+    </div>
+    <script>
+        
+    </script>
+
+</body>
+
+</html>

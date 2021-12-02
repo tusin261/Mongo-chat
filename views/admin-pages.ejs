@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/squib-ico.ico">
+    <title>Admin</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/js/javascript.js">
+
+</head>
+
+<body>
+    <div class="container-fluid">
+        <!-- Header -->
+        <div class="row bg-white border">
+            <div class="col-2">
+                <a href="" style="text-decoration: none;">
+                    <img src="/squib3.png" alt="" style="width: 75px; height:70px; float: left;">
+                </a>
+            </div>
+            <div class="col-8">
+            </div>
+            <div class="col-2">
+                <div class="row mt-3">
+                    <div class="dropdown" style="cursor: pointer;">
+                        <div class="dropdown-toggle" data-toggle="dropdown"><img src="/account.png" alt=""
+                                style="width:40px;"></div>
+                        <div class="dropdown-menu mr-5">
+                            <a class="dropdown-item" href="/">Đăng xuất</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="row">
+            <div class="col-12 text-center ">
+                <div class="col-8 p-5 ">
+                    <marquee behavior="" direction="" scrollamount="30" hspace="20%">
+                        <h5 class="display-4 font-weight-normal font-weight-bold"
+                            style="text-shadow: 5px 5px 5px turquoise ; font-family:cursive ;color: deepskyblue;">Chào
+                            mừng bạn
+                            đến
+                            với ban quản trị của Squib !</h5>
+                    </marquee>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- Center -->
+        <div class="row">
+
+            <!-- Left -->
+            <div class="col-2 border-right bg-white pt-2">
+                <div>
+                    <h5 class="font-weight-bold"
+                        style="color: rgba(10, 10, 10, 0.712);font-family: Roboto; text-transform: uppercase; ">Xin
+                        chào:</h5>
+                    <h3 class="font-weight-bold"
+                        style="color: rgba(10, 10, 10, 0.712) ;font-family: Roboto; text-transform: uppercase;">
+                        
+                    </h3>
+                </div>
+
+                <nav class="navbar"
+                    style="background-color: #199054 ; border-radius: 5px; box-shadow: silver  -0.5px 5px 5px;" ;>
+                    <ul class="nav nav-pills flex-column">
+                        <li class="nav-item pill-1 mb-3">
+                            <a class="nav-link active" data-toggle="tab" href="#"
+                                style="text-transform: uppercase; font-size: 20px;">
+                                Trang chủ
+                            </a>
+                        </li>
+                    </ul>
+
+                </nav>
+
+            </div>
+
+            <!-- Right -->
+            <div class="col-10 border-left bg-white">
+                <div class="row m-3">
+                    <div class="col-5">
+                        <h2
+                            style="color: rgba(10, 10, 10, 0.712); font-family: Roboto; text-transform: uppercase; font-weight: bold;">
+                            Quản lí người dùng</h2>
+                    </div>
+
+                    <div class="offset-4 col-3">
+                        <div class="input-group ">
+                            <input type="text" class="form-control shadow-none mx-2" placeholder="Tìm kiếm"
+                                style="border-radius: 50px; max-width: 200px;"></input>
+                            <div class="input-group-append" id="btsearch">
+                                <button type="button" class="btn shadow-none"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="table table-responsive box-admin mt-3">
+                    <table class="table table-bordered table-responsive table-striped">
+                        <thead class="table-success">
+                            <tr>
+                                <th width="4%" class="th-sm">STT</th>
+                                <th class="th-sm">UserName</th>
+                                <th class="th-sm">Email</th>
+                                <th class="th-sm">Ngày tạo</th>
+                                <th class="th-sm">Tình trạng</th>
+                                <th class="th-sm">Xóa tài khoản</th>
+                                
+                            </tr>
+                        </thead>
+                        <%for(let i=0;i<users.length;i++){%>
+                            <tr>
+                                <td><%=i+1%></td>
+                                <td><%=users[i].userName%></td>
+                                <td><%=users[i].email%></td>
+                                <td><%=users[i].createdAt%></td>
+                                <%if(users[i].isAuth == true){%>
+                                    <td>
+                                        <a href="/users/admin/edit?userName=<%=users[i].userName%>&adId=<%=adId%>" onclick="return confirm('Bạn có muốn khóa tài khoản này?')">Đang kích hoạt</a>
+                                    </td>
+                                <%} else {%>
+                                    <td>
+                                        <a href="/users/admin/edit?userName=<%=users[i].userName%>&adId=<%=adId%>" onclick="return confirm('Bạn có muốn mở khóa tài khoản này?')">Đang khóa</a>
+                                    </td>
+                                    
+                                <%}%>
+                                <td><a href="/users/admin/delete?userName=<%=users[i].userName%>&adId=<%=adId%>" onclick="return confirm('Bạn có muốn xóa tài khoản này không?')">Xóa tài khoản</a></td>
+                                
+                            </tr>
+                        <%}%>
+                </div>
+
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+    </div>
+
+    <div class="row fixed-bottom border" id="footer">
+        <div class="text-center">
+            ©2021 Đồ án web chat: <b>Nhóm </b>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>

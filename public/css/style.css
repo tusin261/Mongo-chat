@@ -1,0 +1,480 @@
+*{
+    margin: 0px auto;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+/* .outer{
+    padding: 20px 50px;
+    width:200px;
+    height: 300px;
+    border:2px solid grey;
+    border-radius: 5px;
+    background-color: darkgray;
+} */
+
+.snow-bg {
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: auto;
+    background-image: url('../assets/images/sakura-1-1.png'), url('../assets/images/sakura-2.png');
+    animation: snow 10s linear infinite;
+}
+@keyframes imagerotate {
+    0% {
+    }
+
+    50% {
+        transform: rotate(5deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes snow {
+    0% {
+        background-position: 0px 0px, 0px 0px, 0px 0px;
+    }
+
+    50% {
+        background-position: 500px 500px, 100px 200px, -100px 150px;
+    }
+
+    100% {
+        background-position: 500px 1000px, 200px 400px, -100px 300px;
+    }
+}
+
+
+#btsend:hover{
+    cursor: pointer;
+    background-color: seagreen;
+    border-radius: 50px;
+}
+#btsearch:hover{
+    cursor: pointer;
+    background-color:#DDDDDD;
+    border-radius: 50px;
+}
+#lbCheck:hover{
+    cursor: pointer;
+    background-color:#DDDDDD;
+
+}
+/* not active */
+.nav-pills .pill-1 .nav-link:not(.active) {
+    background-color: #199054;
+    color: white;
+}
+
+.nav-pills .pill-2 .nav-link:not(.active) {
+    background-color: #199054;
+    color: white;
+}
+
+.nav-pills .pill-3 .nav-link:not(.active) {
+    background-color: #199054;
+    color: white;
+}
+
+
+/* active (faded) */
+.nav-pills .pill-1 .nav-link {
+    background-color: #118054;
+    color: white;
+    border-radius: 10px;
+}
+
+.nav-pills .pill-2 .nav-link {
+    background-color: #198054;
+    color: white;
+    border-radius: 10px;
+}
+
+.nav-pills .pill-3 .nav-link {
+    background-color: #198054;
+    color: white;
+    border-radius: 10px;
+}
+
+
+/* li:hover{
+    cursor: pointer;
+    background-color:seagreen;
+    color:white;
+
+} */
+
+/* #list-group-item {
+    width: 125px; 
+    font-size: 20px;
+    text-align: center;
+    text-decoration: none;
+}
+.list-group-item:hover {
+    background-color: pink;
+    font-weight:bold;
+    color: white;
+    border: 5px solid white;
+    text-decoration:none;
+}
+#listcurrent {
+    background-color: tomato;
+    font-weight:bold;
+    color: white;
+    border: 5px solid white;
+    text-shadow: 0px 0px 10px yellow;
+} */
+
+
+/* li:hover{
+    cursor: pointer;
+    background-color:tomato;
+    color:white;
+    transition: 500ms;
+}
+a{
+    text-decoration:none;
+}
+
+#danhmuc{
+    font-family: 'Courier', sans-serif;
+    font-weight:bold;
+    color: white;
+}
+#TitleCart {
+    font-family: 'Courier', sans-serif;
+    font-weight: bold;
+    color: white;
+    font-size:40px;
+}
+.list-group-item {
+    width: 300px;
+    margin-bottom: 10px;
+    border: 2px solid white;
+    font-size: 20px;
+    text-align: center;
+    color: tomato;
+    text-decoration: none;
+}
+.list-group-item:hover {
+    background-color: pink;
+    font-weight:bold;
+    color: white;
+    border: 5px solid white;
+    text-decoration:none;
+}
+#listcurrent {
+    background-color: tomato;
+    font-weight:bold;
+    color: white;
+    border: 5px solid white;
+    text-shadow: 0px 0px 10px yellow;
+}
+.card-title a{
+    color:tomato;
+}
+
+.dropdown-content{
+    background-color: white;
+    display: none;
+    position:absolute;
+    list-style: none;
+    top: 46px;
+    z-index: 1;
+    transition: 1000ms;
+ }
+
+.dropdown:hover .dropdown-content{
+    display: block;
+    
+ }
+.dropdown-item{
+    height: 40px;
+    
+}
+ } */
+
+
+
+
+/*
+*
+* ==========================================
+* FOR DEMO PURPOSES
+* ==========================================
+*
+*/
+#footer {
+    height:50px;
+    line-height: 50px;
+    background-color: #dcdcde;
+ }
+
+  
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    width: 5px;
+    background: #f5f5f5;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    width: 1em;
+    background-color: #ddd;
+    border-radius: 1rem;
+  }
+  
+  .text-small {
+    font-size: 0.9rem;
+  }
+  .chat-box{
+    max-height: calc(90vh - 210px);
+    overflow: auto;
+    padding: 10px;
+  }
+  .messages-box{
+    height: 80vh;
+    overflow-y: auto;
+  }
+.box-admin{
+    height: 70vh;
+    overflow-y: auto;
+  }
+  .boxAddGroup{
+    max-height: calc(60vh - 210px);
+    overflow-y: auto;
+  }
+  .rounded-lg {
+    border-radius: 0.5px;
+  }
+  
+  input::placeholder {
+    font-size: 0.9rem;
+    color: #999;
+  }
+  #trungtam{
+      position: fixed;
+      height: 100%;
+      width: 100%;
+  }
+
+  #typing{
+    position:fixed;
+    bottom: 0;
+    margin-bottom: 30px;
+    background-color: white;
+  }
+
+
+.tooltip-inner {
+    background-color: red !important;
+
+  }
+  .bs-tooltip-top .arrow::before, .bs-tooltip-auto[x-placement^="top"] .arrow::before {
+    border-top-color: red !important;
+  }
+  
+  .bs-tooltip-right .arrow::before, .bs-tooltip-auto[x-placement^="right"] .arrow::before {
+    border-right-color:red !important;
+  }
+  
+  
+  .bs-tooltip-bottom .arrow::before, .bs-tooltip-auto[x-placement^="bottom"] .arrow::before {
+    border-bottom-color: red !important;
+  }
+  
+  
+  .bs-tooltip-left .arrow::before, .bs-tooltip-auto[x-placement^="left"] .arrow::before {
+    border-left-color: red !important;
+  }
+#er1x{
+    color: red;
+}
+
+/* #chat{   
+    height: 350px;
+    margin-bottom: 50px;
+    width: 100%;
+   overflow: scroll;
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+ } */
+
+
+
+/* .chat-mess{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+} */
+.img-chat{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 5px;
+}
+/* .chat-top{
+  display: flex;
+} */
+.text-chat{
+    padding: 10px;
+    border-radius: 20px;
+    background-color: rgb(148, 189, 172);
+    color: white;
+    width: fit-content;
+    max-width: 300px;
+    margin-top:0px;
+    margin-bottom:0px;
+}
+.image-chat{
+  padding: 10px;
+  border-radius: 20px;
+  /* background-color: rgb(148, 189, 172); */
+  color: white;
+  width: fit-content;
+  max-width: 300px;
+  margin-top:0px;
+  margin-bottom:0px;
+}
+/* .chat-bottom{
+    margin-left: 5px;   
+}
+.chat-box.sender{
+   align-items: flex-end;
+} */
+
+#borderText{
+    border-style: 5px solid black;
+    border-width: 10px;
+}
+
+/* MODAL IMAGE */
+#myImg {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  #myImg:hover {opacity: 0.7;}
+  
+  /* The Modal (background) */
+  .modalImg {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+  }
+  
+  /* Modal Content (image) */
+  .modalImg-content {
+    margin: auto;
+    display: block;
+    max-width: 50%;
+    max-height: 50%;
+  
+  }
+  
+  /* Caption of Modal Image */
+  #caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+  }
+  
+  /* Add Animation */
+  .modalImg-content, #caption {  
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+  }
+  
+  @-webkit-keyframes zoom {
+    from {-webkit-transform:scale(0)} 
+    to {-webkit-transform:scale(1)}
+  }
+  
+  @keyframes zoom {
+    from {transform:scale(5)} 
+    to {transform:scale(1)}
+  }
+  
+  /* The Close Button */
+  /* .close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+  } */
+  
+  /* 100% Image Width on Smaller Screens */
+  @media only screen and (max-width: 100%){
+    .modalImg-content {
+      width: 100%;
+    }
+  }
+
+.pushthongbao{
+  background-color: red;
+  border-radius: 50px;
+}
+
+.notification {
+
+  text-decoration: none;
+  /* padding: 15px 26px; */
+  position: relative;
+  display: inline-block;
+  /* border-radius: 2px; */
+}
+
+/* .notification:hover {
+  background: red;
+} */
+
+
+.reddot {
+  background: red;
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  position: absolute;
+  top: -5px;
+  right: 10px;
+ 
+}
