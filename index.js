@@ -11,7 +11,7 @@ const message_router = require('./routes/message_route');
 const {socketConnection} =require('./utils/socket-io');
 socketConnection(server);
 mongoose.connect(process.env.MONGO_URL);
-
+const PORT = process.env.PORT || 3000;
 
 require('dotenv').config({
     path: __dirname + "/.env"
@@ -43,7 +43,7 @@ app.get('/', (req, res) => {
 
 
 
-server.listen(3000, () => {
+server.listen(PORT, () => {
     console.log('Server is running 3000...');
 });
 
