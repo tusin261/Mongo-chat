@@ -66,9 +66,17 @@
                                 
                              </div>
                              <div style="color: red; height: 20px;" id="saimk" class="mt-1"></div>
-                             <div style="color: red; height: 20px;margin-bottom: 25px;" id="tb" class="mt-1"></div>
+                             <div style="color: red; height: 20px;" id="tb" class="mt-1"></div>
                              <input type="submit" class="btn btn-info mt-2" value="Đổi mật khẩu">
+                             <hr>   
                         </form>
+                        <form id="form-change-avata" class="col-7" enctype="multipart/form-data">
+                            <input type="hidden" id="userId" value="<%=user._id%>" name="userId">
+                            <input type="file" accept=".png, .jpg, .jpeg, .gif" name="image" id="img" style="display:none;" onchange="readURL(this);"/>
+                            <label for="img" class="border border-primary p-2">Đổi ảnh đại diện</label>
+                            <img id="blah">
+                            <input type="submit" class="btn btn-info col-8">
+                         </form>
 
                         <button class="btn btn-light mb-5"><a href="/users?userId=<%=user._id%>" class="text-decoration-none"><img src="/back.png" alt="" style="width: 40px;"></a></button>
 
@@ -89,6 +97,21 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         const newPass = $('#new_pass');
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                $('#blah')
+                    .attr('src', e.target.result)
+                    .width(150)
+                    .height(200);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+
         function kt_new_pass(){
             const regex = /^(?=.*\d)[a-zA-Z\d]{8,}$/;
             if(!(regex.test(newPass.val()))){
@@ -117,6 +140,27 @@
                 }
             });
         });
+
+        $('#form-change-avata').on('submit',(function(e) {
+            e.preventDefault();
+            let formData = new FormData(this);
+
+            $.ajax({
+                type:'POST',
+                url: "/auth/change-avata",
+                data:formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success:function(data){
+                    alert(data.tbfile);
+                },
+                error: function(data){
+                    alert('Đổi avata không thành công');
+                }
+            });
+    }));
+
     </script>
 </body>
 

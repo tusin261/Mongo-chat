@@ -34,5 +34,6 @@ auth_router.post('/register',upload.single('image'),auth_controller.dangki);
 auth_router.post('/',auth_controller.dangnhap);
 auth_router.get('/complete-register/:hashId',auth_controller.dangki_thanhcong);
 auth_router.post('/change-password',auth_controller.change_password);
+auth_router.post('/change-avata',upload.single('image'),auth_controller.change_avata);
 
 module.exports = auth_router;

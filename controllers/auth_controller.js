@@ -97,6 +97,41 @@ module.exports.change_password = async (req,res)=>{
         res.send({mess:"ok"});
     }
 }
+module.exports.change_avata = async (req,res)=>{
+    const {userId} = req.body;
+    if(req.file){
+        const image = req.file.originalname.split('.');
+        const fileType = image[image.length-1];
+        const filePath = `${uuid() + Date.now().toString()}.${fileType}`; 
+            
+        const params = {
+            Bucket: "uploads3-chat-app",
+            Key: filePath,
+            Body: req.file.buffer
+        }
+        s3.upload(params,(err,data)=>{
+            if(err){
+                console.log(err);
+                res.send({tbfile:"Đổi ảnh đại diện không thành công"});
+            }
+            else{
+                user_model.findOneAndUpdate({_id:userId},{$set:{image_url:`${CLOUD_FONT_URL}${filePath}`}},(err,data1)=>{
+                    if(err){
+                        console.log(err);
+                    }else{
+                        res.send({tbfile:"Đổi ảnh đại diện thành công"});
+                    }
+                });
+                
+            }
+    
+        });
+
+    }else{
+        res.send({tbfile:"Phải chọn ảnh để đổi ảnh đại diện"});
+    }
+    
+}
 module.exports.dangki = async (req, res) => {
     const {email,user_name,password} = req.body;
     let newPass = encrypt(password);
