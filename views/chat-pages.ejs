@@ -569,6 +569,7 @@
 
             if(document.getElementById("myText").value == ''){
                 document.getElementById("myText").value = '';
+                alert('Tin nhắn không hợp lệ!');
             }
             else{
                 socket.emit("sendMessage", {

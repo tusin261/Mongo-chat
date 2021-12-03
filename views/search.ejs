@@ -244,6 +244,7 @@
           function sendMess(){
             if(document.getElementById('message').value == ''){
                 document.getElementById("message").value = '';
+                alert('Tin nhắn không hợp lệ!');
             }else{
                 socket.emit("sendMessage", {
                 senderId: senderId,
