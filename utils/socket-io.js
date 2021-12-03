@@ -45,9 +45,7 @@ exports.socketConnection = (server) => {
         
         // get userid va socketid
         socket.on('addUser',(data)=>{
-            //console.log(data);
             adduser(data.userId,socket.id);
-            
         });
         
         socket.on("sendImage",async (data)=>{
@@ -119,48 +117,57 @@ exports.socketConnection = (server) => {
         socket.on("sendMessage",async (data)=>{
             try {
                 const user = getUser(data.receiverId);
-            const user2 = getUser(data.senderId);
-            console.log(users);
-            const conversationId = data.conversationId;
-            const conversation = await conversation_model.findById(conversationId);
-            let newMessage = null;
-            if(conversation){
-                newMessage = new message_model({senderId:data.senderId,content:data.text,type:"text",conversationId:conversationId});
-            }else{
-                const newConversation = new conversation_model({
-                    members:[data.senderId,data.receiverId],
-                
-                });
-                const savedConversation = await newConversation.save();
-                newMessage = new message_model({senderId:data.senderId,content:data.text,type:"text",conversationId:savedConversation._id.toString()});
-            }
+                const user2 = getUser(data.senderId);
+                console.log(users);
+                const conversationId = data.conversationId;
+                const conversation = await conversation_model.findById(conversationId);
+                let newMessage = null;
+                if(conversation){
+                    newMessage = new message_model({senderId:data.senderId,content:data.text,type:"text",conversationId:conversationId});
+                }else{
+                    const newConversation = new conversation_model({
+                        members:[data.senderId,data.receiverId],
+                    
+                    });
+                    const savedConversation = await newConversation.save();
+                    newMessage = new message_model({senderId:data.senderId,content:data.text,type:"text",conversationId:savedConversation._id.toString()});
+
+                    //new
+                    io.to(user.socketId).emit("getNewConversation",{
+                        nameSender:userSender.userName,
+                        senderId:data.senderId,
+                        receiverId:data.receiverId,
+                        conversationId:savedConversation._id.toString(),
+                        urlImg:userSender.image_url
+                    });
+                }
             
-            const savedmess = await newMessage.save();
-            const userSender = await user_model.findById(data.senderId);
-            if(!user){
-                io.to(user2.socketId).emit("getMessage",{
-                    nameSender:userSender.userName,
-                    senderId:data.senderId,
-                    content:data.text,
-                    time:savedmess.createdAt,
-                    urlImg:userSender.image_url
-                });
-            }else{
-                io.to(user.socketId).emit("getMessage",{
-                    nameSender:userSender.userName,
-                    senderId:data.senderId,
-                    content:data.text,
-                    time:savedmess.createdAt,
-                    urlImg:userSender.image_url
-                })
-                io.to(user2.socketId).emit("getMessage",{
-                    nameSender:userSender.userName,
-                    senderId:data.senderId,
-                    content:data.text,
-                    time:savedmess.createdAt,
-                    urlImg:userSender.image_url
-                })
-            } 
+                const savedmess = await newMessage.save();
+                const userSender = await user_model.findById(data.senderId);
+                if(!user){
+                    io.to(user2.socketId).emit("getMessage",{
+                        nameSender:userSender.userName,
+                        senderId:data.senderId,
+                        content:data.text,
+                        time:savedmess.createdAt,
+                        urlImg:userSender.image_url
+                    });
+                }else{
+                    io.to(user.socketId).emit("getMessage",{
+                        nameSender:userSender.userName,
+                        senderId:data.senderId,
+                        content:data.text,
+                        time:savedmess.createdAt,
+                        urlImg:userSender.image_url
+                    })
+                    io.to(user2.socketId).emit("getMessage",{
+                        nameSender:userSender.userName,
+                        senderId:data.senderId,
+                        content:data.text,
+                        time:savedmess.createdAt,
+                        urlImg:userSender.image_url
+                    })
+                } 
             } catch (error) {
                 console.log("Error");
             }

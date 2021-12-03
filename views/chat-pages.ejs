@@ -200,7 +200,7 @@
                                                         <img src="<%=list_conversation[i].friendImg%>" alt="user" width="50" height="50" class="rounded-circle mx-4" id="conversation">
                                                     </div>
                                                     <div class="flex-grow-1">
-                                                        <h4 class="mt-2 mx-5" style="color: black; text-align: left;"><%=list_conversation[i].friendName%></h4>
+                                                        <h4 class="mt-2 mx-2" style="color: black; text-align: left;"><%=list_conversation[i].friendName%></h4>
                                                     </div>
                                                     <!-- Thông báo -->
                                                     <div class="align-self-center"><span class="badge badge-danger" id="thongbao" style="border-radius: 50%;"></span></div>
@@ -532,9 +532,8 @@
             $("#inputMK").prop('disabled', false);
         }
         socket.emit("addUser", {
-            userId:document.getElementById('senderId').value
+                userId:document.getElementById('senderId').value
         });
-        
         function cleartb(){
             document.getElementById('thongbao').style.visibility = "hidden";
             document.getElementById('thongbaodiv').style.visibility = "hidden";
