@@ -130,16 +130,7 @@ exports.socketConnection = (server) => {
                     
                     });
                     const savedConversation = await newConversation.save();
-                    newMessage = new message_model({senderId:data.senderId,content:data.text,type:"text",conversationId:savedConversation._id.toString()});
-
-                    //new
-                    io.to(user.socketId).emit("getNewConversation",{
-                        nameSender:userSender.userName,
-                        senderId:data.senderId,
-                        receiverId:data.receiverId,
-                        conversationId:savedConversation._id.toString(),
-                        urlImg:userSender.image_url
-                    });
+                    newMessage = new message_model({senderId:data.senderId,content:data.text,type:"text",conversationId:savedConversation._id.toString()}); 
                 }
             
                 const savedmess = await newMessage.save();
