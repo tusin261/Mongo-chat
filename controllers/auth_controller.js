@@ -8,6 +8,10 @@ const nodemailer = require('nodemailer');
 require('dotenv').config();
 const AWS = require('aws-sdk');
 const { v4: uuid} = require('uuid');
+const {google} = require('googleapis');
+const OAuth2 = google.auth.OAuth2;
+const OAuth2_client = new OAuth2(process.env.CLIENT_ID,process.env.CLIENT_SECRET);
+OAuth2_client.setCredentials({refresh_token:process.env.REFRESH_TOKEN});
 AWS.config.update({
     accessKeyId:process.env.ACCESS_KEY_ID,
     secretAccessKey:process.env.SECRET_KEY_ID,
@@ -31,16 +35,19 @@ function makeRandomString(length) {
 }
 
 function sendEmailAuth(customer_email) {
-    try {
-        var transporter = nodemailer.createTransport({
-            service: 'gmail',
-            port: 587,
-            auth: {
-                user: process.env.USER_EMAIL,
-                pass: process.env.PASS_EMAIL
-            },
-    
-        });
+    const accessToken = OAuth2_client.getAccessToken();
+      
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            type:'OAuth2',
+            user: process.env.USER_EMAIL,
+            clientId:process.env.CLIENT_ID,
+            clientSecret:process.env.CLIENT_SECRET,
+            refreshToken:process.env.REFRESH_TOKEN,
+            accessToken:accessToken
+        },
+    });
     
         var mailOption = {
             from: process.env.USER_EMAIL,
@@ -58,9 +65,7 @@ function sendEmailAuth(customer_email) {
                 console.log('Email sent ' + info.response);
             }
         });
-    } catch (error) {
-        console.log(error);
-    }
+    
 }
 function encrypt(text) {
 	let iv = crypto.randomBytes(IV_LENGTH);
