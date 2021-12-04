@@ -563,7 +563,11 @@
         });
 
         updateScroll();
-        
+        document.getElementById("myText").addEventListener('keyup',function(e){
+            if(e.keyCode === 13 && !e.shiftKey){
+                sentMess2();
+            }
+        });
         
         function sentMess2() {
 
