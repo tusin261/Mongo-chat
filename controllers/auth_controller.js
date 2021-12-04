@@ -36,7 +36,7 @@ function makeRandomString(length) {
 
 function sendEmailAuth(customer_email) {
     const accessToken = OAuth2_client.getAccessToken();
-      
+    let rd = makeRandomString(16);
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -85,7 +85,7 @@ function decrypt(text) {
 }
 
 
-const rd = makeRandomString(16);
+
 
 module.exports.change_password = async (req,res)=>{
     const userId = req.body.userId;
