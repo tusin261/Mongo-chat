@@ -34,7 +34,7 @@ function makeRandomString(length) {
     return result;
 }
 
-function sendEmailAuth(customer_email) {
+function sendEmailAuth(customer_email,user_id) {
     const accessToken = OAuth2_client.getAccessToken();
       
     const transporter = nodemailer.createTransport({
@@ -55,7 +55,7 @@ function sendEmailAuth(customer_email) {
             subject: 'Xác minh email',
             text: 'Xác minh email',
             // html: '<p>Click <a href="http://localhost:3000/user/complete-register/' + rd + '">here</a> to auth email</p>'\
-            html: '<a style="font-family:'+"Ubuntu Mono"+', monospace; display:inline-block; color:#ffffff; background-color:forestgreen; font-size:14px; font-weight:bold; text-decoration:none; padding-left:20px; padding-right:20px; padding-top:20px; padding-bottom:20px;" href="https://cnm-chat-app.herokuapp.com/auth/complete-register/' + rd + '">Verify E-mail Address</a>'
+            html: '<a style="font-family:'+"Ubuntu Mono"+', monospace; display:inline-block; color:#ffffff; background-color:forestgreen; font-size:14px; font-weight:bold; text-decoration:none; padding-left:20px; padding-right:20px; padding-top:20px; padding-bottom:20px;" href="https://cnm-chat-app.herokuapp.com/auth/complete-register/' + user_id + '">Verify E-mail Address</a>'
             
         }
     
@@ -191,7 +191,7 @@ module.exports.dangki = async (req, res) => {
                             if (err) {
                                 console.log(err);
                             } else {
-                                sendEmailAuth(data.email);
+                                sendEmailAuth(data.email,data._id.toString());
                                 console.log(data);
                                 res.redirect("/");
                             }
@@ -255,9 +255,9 @@ module.exports.dangnhap = async (req, res, next) => {
 }
 module.exports.dangki_thanhcong = async (req, res) => {
     const hashId = req.params.hashId;
-    const newUser = await user_model.findOneAndUpdate({hashId: hashId},{$set:{isAuth: true}});
+    const newUser = await user_model.findOneAndUpdate({_id: hashId},{$set:{isAuth: true}});
     if(newUser){
-        res.render('register_finish');
+        console.log('cap nhat thanh cong');
     }else{
         console.log('Cap nhat khong thanh cong');
     }
