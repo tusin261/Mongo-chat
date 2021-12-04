@@ -34,9 +34,9 @@ function makeRandomString(length) {
     return result;
 }
 
-function sendEmailAuth(customer_email) {
+function sendEmailAuth(customer_email,rd) {
     const accessToken = OAuth2_client.getAccessToken();
-    let rd = makeRandomString(16);
+    
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -138,6 +138,7 @@ module.exports.change_avata = async (req,res)=>{
 }
 module.exports.dangki = async (req, res) => {
     const {email,user_name,password} = req.body;
+    let rd = makeRandomString(16);
     let newPass = encrypt(password);
     const numC = await user_model.countDocuments();
     const userInDb = await user_model.findOne({$or:[{email:email},{userName:user_name}]});
@@ -190,7 +191,7 @@ module.exports.dangki = async (req, res) => {
                             if (err) {
                                 console.log(err);
                             } else {
-                                sendEmailAuth(data.email);
+                                sendEmailAuth(data.email,rd);
                                 res.redirect("/");
                             }
                         });
@@ -210,7 +211,7 @@ module.exports.dangki = async (req, res) => {
                     if (err) {
                         console.log(err);
                     } else {
-                        sendEmailAuth(data.email);
+                        sendEmailAuth(data.email,rd);
                         res.redirect("/");
                     }
                 });
