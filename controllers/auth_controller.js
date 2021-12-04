@@ -34,7 +34,7 @@ function makeRandomString(length) {
     return result;
 }
 
-function sendEmailAuth(customer_email,user_id) {
+function sendEmailAuth(customer_email) {
     const accessToken = OAuth2_client.getAccessToken();
       
     const transporter = nodemailer.createTransport({
@@ -54,8 +54,7 @@ function sendEmailAuth(customer_email,user_id) {
             to: customer_email,
             subject: 'Xác minh email',
             text: 'Xác minh email',
-            // html: '<p>Click <a href="http://localhost:3000/user/complete-register/' + rd + '">here</a> to auth email</p>'\
-            html: '<a style="font-family:'+"Ubuntu Mono"+', monospace; display:inline-block; color:#ffffff; background-color:forestgreen; font-size:14px; font-weight:bold; text-decoration:none; padding-left:20px; padding-right:20px; padding-top:20px; padding-bottom:20px;" href="https://cnm-chat-app.herokuapp.com/auth/complete-register/' + user_id + '">Verify E-mail Address</a>'
+            html: '<a style="font-family:'+"Ubuntu Mono"+', monospace; display:inline-block; color:#ffffff; background-color:forestgreen; font-size:14px; font-weight:bold; text-decoration:none; padding-left:20px; padding-right:20px; padding-top:20px; padding-bottom:20px;" href="https://cnm-chat-app.herokuapp.com/auth/complete-register/' + rd + '">Verify E-mail Address</a>'
             
         }
     
@@ -86,7 +85,7 @@ function decrypt(text) {
 }
 
 
-const rd = makeRandomString(128);
+const rd = makeRandomString(16);
 
 module.exports.change_password = async (req,res)=>{
     const userId = req.body.userId;
@@ -191,8 +190,7 @@ module.exports.dangki = async (req, res) => {
                             if (err) {
                                 console.log(err);
                             } else {
-                                sendEmailAuth(data.email,data._id.toString());
-                                console.log(data);
+                                sendEmailAuth(data.email);
                                 res.redirect("/");
                             }
                         });
@@ -253,12 +251,14 @@ module.exports.dangnhap = async (req, res, next) => {
         res.render('login-pages',{saiemail:true});
     }
 }
-module.exports.dangki_thanhcong = async (req, res) => {
+module.exports.dangki_thanhcong = (req, res) => {
     const hashId = req.params.hashId;
-    const newUser = await user_model.findOneAndUpdate({_id: hashId},{$set:{isAuth: true}});
-    if(newUser){
-        console.log('cap nhat thanh cong');
-    }else{
-        console.log('Cap nhat khong thanh cong');
-    }
+    user_model.findOneAndUpdate({hashId: hashId},{$set:{isAuth: true}},(err,data)=>{
+        if(err){
+            console.log(err);
+        }else{
+            res.render('register_finish');
+        }
+    })
+    
 }
